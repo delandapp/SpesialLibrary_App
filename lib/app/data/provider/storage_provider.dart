@@ -26,4 +26,5 @@ class StorageKey {
   static const String status = "status";
   static const String username = "username";
   static const String idUser = '1';
+  static const String bearerToken = '';
 }

@@ -2,7 +2,9 @@ import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:spesiallibrary/app/data/constans/endpoint.dart';
+import 'package:spesiallibrary/app/data/models/response_login.dart';
 import 'package:spesiallibrary/app/data/provider/api_provider.dart';
+import 'package:spesiallibrary/app/data/provider/storage_provider.dart';
 import 'package:spesiallibrary/app/routes/app_pages.dart';
 
 class LoginController extends GetxController {
@@ -47,11 +49,12 @@ class LoginController extends GetxController {
             )
         );
         if (response.statusCode == 200) {
-          // ResponseLogin responseLogin = ResponseLogin.fromJson(response.data);
-          // await StorageProvider.write(StorageKey.status, "logged");
-          // await StorageProvider.write(StorageKey.username, responseLogin.data!.username.toString());
-          // await StorageProvider.write(StorageKey.idUser, responseLogin.data!.id.toString());
-          Get.offAllNamed(Routes.HOME);
+          ResponseLogin responseLogin = ResponseLogin.fromJson(response.data);
+          await StorageProvider.write(StorageKey.status, "logged");
+          await StorageProvider.write(StorageKey.username, responseLogin.data!.username.toString());
+          await StorageProvider.write(StorageKey.idUser, responseLogin.data!.id.toString());
+          await StorageProvider.write(StorageKey.bearerToken, responseLogin.data!.token.toString());
+          Get.offAllNamed(Routes.DASHBOARD);
           Get.snackbar("Success", "Login Berhasil", backgroundColor: Colors.red);
         } else {
           Get.snackbar("Sorry", "Login Gagal", backgroundColor: Colors.red);

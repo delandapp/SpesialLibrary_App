@@ -4,15 +4,23 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
+  static const DASHBOARD = _Paths.DASHBOARD;
   static const HOMESCREEN = _Paths.HOMESCREEN;
   static const LOGIN = _Paths.LOGIN;
   static const REGISTER = _Paths.REGISTER;
+  static const BOOK = _Paths.BOOK;
+  static const HISTORY = _Paths.HISTORY;
+  static const PROFILE = _Paths.PROFILE;
 }
 
 abstract class _Paths {
   _Paths._();
   static const HOME = '/home';
+  static const DASHBOARD = '/dashboard';
   static const HOMESCREEN = '/homescreen';
   static const LOGIN = '/login';
   static const REGISTER = '/register';
+  static const BOOK = '/book';
+  static const HISTORY = '/history';
+  static const PROFILE = '/profile';
 }
