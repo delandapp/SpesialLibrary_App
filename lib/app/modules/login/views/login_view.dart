@@ -2,7 +2,44 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../data/constans/validation.dart';
+
+import 'package:form_validator/form_validator.dart';
+
 import '../controllers/login_controller.dart';
+
+extension CustomValidationBuilder on ValidationBuilder {
+  custom() => add((value) {
+        if (!EmailValidator.isValidEmail(value)) {
+          return 'Enter a valid email address with @smk.belajar.id';
+        }
+        return null;
+      });
+  password() => add((value) {
+        if (!PasswordValidator.isValidPasswordUpper(password: value)) {
+          return 'Password must contain at least 1 uppercase letter';
+        }
+        if (!PasswordValidator.isValidPasswordSymbol(password: value)) {
+          return 'Password must contain at least 1 Sysmbol';
+        }
+        return null;
+      });
+  ValidationBuilder confirmPassword(TextEditingController controller) {
+    return this
+      ..add((value) {
+        if (value != controller.text.toString()) {
+          return 'Passwords do not match';
+        }
+        return null;
+      });
+  }
+}
+
+final validatorPassword = ValidationBuilder()
+    .minLength(8, 'Password must be at least 8 characters')
+    .password()
+    .build();
+final validator = ValidationBuilder().email().custom().build();
 
 class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
@@ -31,13 +68,13 @@ class LoginView extends GetView<LoginController> {
               padding: EdgeInsets.symmetric(horizontal: 25,vertical: HeightBody * 0.05),
               child: Column(
                 children: [
-                  Image(image: AssetImage("assets/logo.png"), width: WidthBody * 0.4,),
-                  Text("LOGIN", style: TextStyle(fontWeight: FontWeight.w900,fontSize: 40),),
+                  Image(image: const AssetImage("assets/logo.png"), width: WidthBody * 0.4,),
+                  const Text("LOGIN", style: TextStyle(fontWeight: FontWeight.w900,fontSize: 40),),
                   SizedBox(
                     height: HeightBody * 0.06,
                   ),
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       boxShadow: [
                         BoxShadow(
                           color: Color.fromRGBO(0, 0, 0, 0.2),
@@ -47,7 +84,8 @@ class LoginView extends GetView<LoginController> {
                         ),
                       ],
                     ),
-                    child: TextField(
+                    child: TextFormField(
+                      validator: validator,
                       controller: controller.email,
                         autocorrect: false,
                         autofocus: true,
@@ -56,12 +94,12 @@ class LoginView extends GetView<LoginController> {
                         decoration: InputDecoration(
                           hintText: "Tegar@gmail.com",
                           filled: true,
-                          label: Text("Email"),
+                          label: const Text("Email"),
                           // border: OutlineInputBorder(),
-                          fillColor: Color(0xFFF1F1F1),
+                          fillColor: const Color(0xFFF1F1F1),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.blue.shade400)),
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.white)),
                         )),
                   ),
@@ -69,7 +107,7 @@ class LoginView extends GetView<LoginController> {
                     height: HeightBody * 0.06,
                   ),
                   Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         boxShadow: [
                           BoxShadow(
                             color: Color.fromRGBO(0, 0, 0, 0.2),
@@ -79,7 +117,8 @@ class LoginView extends GetView<LoginController> {
                           ),
                         ],
                       ),
-                    child: Obx(()=>TextField(
+                    child: Obx(()=>TextFormField(
+                      validator: validatorPassword,
                       controller: controller.password,
                         obscureText: controller.isPasswordHidden.value,
                         obscuringCharacter: '*',
@@ -101,13 +140,13 @@ class LoginView extends GetView<LoginController> {
                             },
                           ),
                           hintText: "Password",
-                          label: Text("Password"),
+                          label: const Text("Password"),
                           filled: true,
                           // border: OutlineInputBorder(),
-                          fillColor: Color(0xFFF1F1F1),
+                          fillColor: const Color(0xFFF1F1F1),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.blue.shade400)),
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.white)),
                         )),
                   )
@@ -126,7 +165,8 @@ class LoginView extends GetView<LoginController> {
                           ),
                         ],
                       ),
-                      child: Obx(()=>TextField(
+                      child: Obx(()=>TextFormField(
+                        validator: ValidationBuilder().confirmPassword(controller.password).build(),
                           obscureText: controller.isPasswordConfirmHidden.value,
                           obscuringCharacter: '*',
                           autocorrect: false,

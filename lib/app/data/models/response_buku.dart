@@ -111,7 +111,7 @@ class Buku {
   String? penerbit;
   String? tahunTerbit;
   String? jumlahHalaman;
-  int? rating;
+  var rating;
   int? totalUlasan;
   int? jumlahRating;
   int? jumlahPeminjam;

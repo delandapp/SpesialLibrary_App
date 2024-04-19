@@ -1,5 +1,5 @@
 class Endpoint {
-  static const String baseUrlApi = "http://192.168.4.104:8000/api/users/";
+  static const String baseUrlApi = "http://192.168.4.49:8000/api/users/";
 
 
   static const String login = "${baseUrlApi}login";
@@ -7,4 +7,6 @@ class Endpoint {
   static const String book = "${baseUrlApi}buku";
   static const String pinjam = "${baseUrlApi}pinjam";
   static const String koleksi = "${baseUrlApi}koleksi";
+  static const String ulasan = "${baseUrlApi}ulasan";
+  static const String historyPeminjaman = "${baseUrlApi}pinjam";
 }

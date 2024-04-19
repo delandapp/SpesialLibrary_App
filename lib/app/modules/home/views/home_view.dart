@@ -42,12 +42,9 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
                 SizedBox(
-                  height: heightFullBody * 0.04,
+                  height: heightFullBody * 0.02,
                 ),
                 const MySlider(),
-                SizedBox(
-                  height: heightFullBody * 0.04,
-                ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: widthFullBody * 0.03),
                   child: SizedBox(height: heightFullBody * 0.3, child: KoleksiBook(dataKoleksi: state!.state1!)),

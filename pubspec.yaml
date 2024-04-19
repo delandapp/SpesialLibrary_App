@@ -16,6 +16,7 @@ dependencies:
   form_validator: ^2.1.1
   get: 4.6.6
   carousel_slider: ^4.2.1
+  flutter_rating_bar: ^4.0.1
   flutter: 
     sdk: flutter
 

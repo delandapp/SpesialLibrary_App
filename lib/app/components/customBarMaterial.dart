@@ -17,31 +17,31 @@ class CustomBottomBarMaterial extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Color colorIcon= Color.fromRGBO(159, 159, 159, 1);
-    const Color colorSelect= Color(0xFFE84218);
-    const Color colorBackground= Color(0xff09142E);
+    Color colorIcon= const Color.fromARGB(255, 132, 132, 132);
+    const Color colorSelect= Colors.black;
+    const Color colorBackground= Color(0xFFF3EEEE);
 
     return BottomNavigationBar(
       unselectedItemColor: colorIcon,
       selectedItemColor: colorSelect,
       onTap: onTap,
       currentIndex: currentIndex,
-      showSelectedLabels: true,
+      showSelectedLabels: false,
       type: BottomNavigationBarType.fixed,
       backgroundColor: colorBackground,
-      iconSize: 24,
-      showUnselectedLabels: true,
+      iconSize: 30,
+      showUnselectedLabels: false,
       items: [
         _bottomNavigationBarItem(
           icon: Icons.house_rounded,
           label: 'Home',
         ),
         _bottomNavigationBarItem(
-          icon: Icons.bookmark,
+          icon: Icons.search,
           label: 'Book',
         ),
         _bottomNavigationBarItem(
-          icon: Icons.explore,
+          icon: Icons.history,
           label: 'Bookmark',
         ),
         _bottomNavigationBarItem(

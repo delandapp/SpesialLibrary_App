@@ -1,7 +1,7 @@
 
 import 'package:spesiallibrary/app/modules/home/controllers/home_controller.dart';
 import 'package:spesiallibrary/app/modules/profile/controllers/profile_controller.dart';
-import 'package:spesiallibrary/app/modules/history/controllers/history_controller.dart';
+import 'package:spesiallibrary/app/modules/bookmark/controllers/bookmark_controller.dart';
 import 'package:spesiallibrary/app/modules/book/controllers/book_controller.dart';
 import 'package:get/get.dart';
 
@@ -22,8 +22,8 @@ class DashboardBinding extends Bindings {
     Get.lazyPut<BookController>(
       () => BookController(),
     );
-    Get.lazyPut<HistoryController>(
-      () => HistoryController(),
+    Get.lazyPut<BookmarkController>(
+      () => BookmarkController(),
     );
   }
 }

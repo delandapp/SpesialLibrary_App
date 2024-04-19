@@ -1,7 +1,7 @@
 import 'package:spesiallibrary/app/modules/book/views/book_view.dart';
+import 'package:spesiallibrary/app/modules/bookmark/views/bookmark_view.dart';
 import 'package:spesiallibrary/app/modules/home/views/home_view.dart';
 import 'package:spesiallibrary/app/modules/profile/views/profile_view.dart';
-import 'package:spesiallibrary/app/modules/history/views/history_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../components/customBarMaterial.dart';
@@ -24,7 +24,7 @@ class DashboardView extends StatelessWidget {
                   children: const [
                     HomeView(),
                     BookView(),
-                    HistoryView(),
+                    BookmarkView(),
                     ProfileView(),
                   ],
                 )),

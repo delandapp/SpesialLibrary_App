@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:spesiallibrary/app/data/constans/constans.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MySlider extends StatelessWidget {
   const MySlider({super.key});
@@ -11,7 +10,7 @@ class MySlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: MediaQuery.of(context).size.height * 0.2,
       child: CarouselSlider(
         options: CarouselOptions(
           height: MediaQuery.of(context).size.height * 0.3,
