@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:spesiallibrary/app/data/models/response_bookmark_book.dart';
+import 'package:spesiallibrary/app/data/models/response_history_peminjaman.dart';
+import 'package:spesiallibrary/app/modules/history/controllers/history_controller.dart';
 import 'package:spesiallibrary/app/routes/app_pages.dart';
 
-import '../controllers/bookmark_controller.dart';
-
-class BookmarkView extends GetView<BookmarkController> {
-  const BookmarkView({Key? key}) : super(key: key);
+class HistoryView extends GetView<HistoryController> {
+  const HistoryView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final heightFullBody = MediaQuery.of(context).size.height;
@@ -18,15 +17,17 @@ class BookmarkView extends GetView<BookmarkController> {
         (state) => SafeArea(
           child: Container(
             padding: const EdgeInsets.all(10),
+            height: heightFullBody,
+            width: width,
             child: Obx(
               () => Column(
                       children: [
                         Row(
                           children: [
                             ElevatedButton(
-                              onPressed: () => Get.back(),
+                              onPressed: () => {},
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFD9D9D9),
+                                backgroundColor: const Color(0xFF0094FF),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
                                       MediaQuery.of(context).size.width * 0.01),
@@ -42,13 +43,11 @@ class BookmarkView extends GetView<BookmarkController> {
                                         .fontFamily),
                               ),
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
+                            const SizedBox(width: 10,),
                             ElevatedButton(
-                              onPressed: () => {},
+                              onPressed: () => Get.toNamed(Routes.BOOKMARK),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFF0094FF),
+                                backgroundColor: const Color(0xFFD9D9D9),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
                                       MediaQuery.of(context).size.width * 0.01),
@@ -66,21 +65,19 @@ class BookmarkView extends GetView<BookmarkController> {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        controller.dataBookmark.value ? const Center(child: Text("Tidak Ada History"),) :
+                        const SizedBox(height: 10,),
+                        controller.dataHistoryPeminjaman.value ? const Center(child: Text("Tidak Ada History"),) :
                         Expanded(
                           child: ListView.builder(
-                            itemCount: controller.listKoleksi.length,
+                            itemCount: controller.listHistory.length,
                             itemBuilder: (context, index) {
                               return Dismissible(
                                 onDismissed: (direction) async {
-                                  await controller.deleteKoleksi(controller
-                                      .listKoleksi[index].bukuID!
+                                  await controller.deleteHistory(controller
+                                      .listHistory[index].peminjamanID!
                                       .toInt());
                                   if (controller.jumlahData.value == 0) {
-                                    await controller.getDataKoleksi();
+                                    await controller.getDataHistory();
                                   }
                                 },
                                 confirmDismiss: (direction) {
@@ -129,7 +126,7 @@ class BookmarkView extends GetView<BookmarkController> {
                                 child: ContentKoleksi(
                                   width: width,
                                   heightFullBody: heightFullBody,
-                                  data: controller.listKoleksi[index],
+                                  data: controller.listHistory[index],
                                 ),
                               );
                             },
@@ -154,7 +151,7 @@ class ContentKoleksi extends StatelessWidget {
   });
 
   final double width;
-  final DataBookmark data;
+  final DataHistoryPeminjaman data;
   final double heightFullBody;
 
   @override
@@ -168,8 +165,8 @@ class ContentKoleksi extends StatelessWidget {
           color: const Color.fromARGB(255, 210, 210, 210),
           borderRadius: BorderRadius.circular(10)),
       child: GestureDetector(
-        onTap: () => Get.toNamed(Routes.DETAILBOOK,
-            parameters: {"idbook": data.bukuID.toString()}),
+        onTap: () => Get.toNamed(Routes.PINJAMHISTORY,
+            parameters: {"idPinjam": data.peminjamanID.toString()}),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -194,7 +191,7 @@ class ContentKoleksi extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    data.judul.toString(),
+                    data.judulBuku.toString(),
                     style: TextStyle(
                         fontFamily:
                             GoogleFonts.poppins(fontWeight: FontWeight.w700)
@@ -205,7 +202,7 @@ class ContentKoleksi extends StatelessWidget {
                     textAlign: TextAlign.justify,
                   ),
                   Text(
-                    data.penulis.toString(),
+                    data.penulisBuku.toString(),
                     style: TextStyle(
                         fontFamily:
                             GoogleFonts.poppins(fontWeight: FontWeight.w400)
@@ -216,7 +213,7 @@ class ContentKoleksi extends StatelessWidget {
                     textAlign: TextAlign.justify,
                   ),
                   Text(
-                    data.penerbit.toString(),
+                    data.penerbitBuku.toString(),
                     style: TextStyle(
                         fontFamily:
                             GoogleFonts.poppins(fontWeight: FontWeight.w400)

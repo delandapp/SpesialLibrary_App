@@ -12,38 +12,78 @@ class HomescreenView extends GetView<HomescreenController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFFA6F6FF),
-              Color(0xFFFFFFFF)
-            ]
-          )
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 70,),
-            Image(image: AssetImage('assets/logo.png')),
-            SizedBox(height: 100,),
-            ElevatedButton(onPressed: (){Get.toNamed(Routes.LOGIN);}, child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 80,vertical: 10),
-              child: Text('LOGIN',style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900,fontSize: 30,fontFamily: GoogleFonts.inter().fontFamily),),
-            ),style: ElevatedButton.styleFrom(backgroundColor: Colors.grey[300]),), 
-            SizedBox(height: 40,), 
-            ElevatedButton(onPressed: (){Get.toNamed(Routes.REGISTER);}, child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 60,vertical: 10),
-              child: Text('REGISTER',style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900,fontSize: 30,fontFamily: GoogleFonts.inter().fontFamily),),
-            ),style: ElevatedButton.styleFrom(backgroundColor: Colors.grey[300]),),
-            
-          ],
-        ),
-      )
-    );
+        resizeToAvoidBottomInset: false,
+        body: Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Color(0xFFA6F6FF), Color(0xFFFFFFFF)])),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 70,
+              ),
+              Image(image: AssetImage('assets/logo.png')),
+              SizedBox(
+                height: 100,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Get.toNamed(Routes.LOGIN);
+                },
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 80, vertical: 10),
+                  child: Text(
+                    'LOGIN',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 30,
+                        fontFamily: GoogleFonts.inter().fontFamily),
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey[300],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                        MediaQuery.of(context).size.width * 0.1),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Get.toNamed(Routes.REGISTER);
+                },
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 60, vertical: 10),
+                  child: Text(
+                    'REGISTER',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 30,
+                        fontFamily: GoogleFonts.inter().fontFamily),
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey[300],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                        MediaQuery.of(context).size.width * 0.1),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }

@@ -12,6 +12,11 @@ abstract class Routes {
   static const BOOKMARK = _Paths.BOOKMARK;
   static const PROFILE = _Paths.PROFILE;
   static const DETAILBOOK = _Paths.DETAILBOOK;
+  static const SPLASHSCREEEN = _Paths.SPLASHSCREEEN;
+  static const HISTORY = _Paths.HISTORY;
+  static const PINJAM = _Paths.PINJAM;
+  static const PINJAMHISTORY = _Paths.PINJAMHISTORY;
+  static const KATEGORI = _Paths.KATEGORI;
 }
 
 abstract class _Paths {
@@ -25,4 +30,9 @@ abstract class _Paths {
   static const BOOKMARK = '/bookmark';
   static const PROFILE = '/profile';
   static const DETAILBOOK = '/detailbook';
+  static const SPLASHSCREEEN = '/splashscreeen';
+  static const HISTORY = '/history';
+  static const PINJAM = '/pinjam';
+  static const PINJAMHISTORY = '/pinjamhistory';
+  static const KATEGORI = '/kategori';
 }

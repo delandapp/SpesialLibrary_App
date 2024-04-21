@@ -31,19 +31,16 @@ class DetailbookView extends GetView<DetailbookController> {
                   ),
                 ),
               ),
-              Positioned(
+              Positioned.fill(
                 top: 80,
                 left: 0,
                 right: 0,
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.9,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: MyBookDetails(
-                      controller: controller,
-                      dataBookDetails: state!.state1!,
-                      dataUlasan: state.state2!,
-                    ),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: MyBookDetails(
+                    controller: controller,
+                    dataBookDetails: state!.state1!,
+                    dataUlasan: state.state2!,
                   ),
                 ),
               ),

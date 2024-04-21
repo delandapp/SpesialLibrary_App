@@ -37,6 +37,7 @@ class BookView extends GetView<BookController> {
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.87,
                   child: bookSearch(
+                    controller: controller,
                     data: state!,
                   ),
                 ),

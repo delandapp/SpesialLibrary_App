@@ -36,7 +36,7 @@ class buildSection extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () => null,
+                onTap: () => Get.toNamed(Routes.KATEGORI, parameters: {"kategori" : data.kategoriBuku.toString()}),
                 child: ClipOval(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),

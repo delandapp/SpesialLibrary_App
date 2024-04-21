@@ -1,7 +1,10 @@
+import 'package:spesiallibrary/app/components/bookSearch.dart';
+import 'package:spesiallibrary/app/components/searchInput.dart';
 import 'package:spesiallibrary/app/components/slider.dart';
 import 'package:spesiallibrary/app/data/models/response_buku.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:spesiallibrary/app/modules/book/controllers/book_controller.dart';
 import 'package:spesiallibrary/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
@@ -9,17 +12,40 @@ class bookSearch extends StatelessWidget {
   const bookSearch({
     super.key,
     required this.data,
+    required this.controller,
   });
 
   final List<DataBuku> data;
+  final BookController controller;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(children: [
         const MySlider(),
-        Column(
-          children: data.map((e) => MyBuku(data: e.buku)).toList(),
-        )
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: MyInputSearch(
+            prefixIcon: Icons.search,
+            validator: controller.validator,
+            controller: controller,
+            controllerField: controller.search,
+            height: 10,
+            width: 10,
+            hintText: "Apa yang ingin kamu baca",
+            autoFocus: false,
+          ),
+        ),
+        Obx(
+          () => controller.searchLenght.value == 1
+              ? controller.loading.value == false
+                  ? controller.listDataBuku.isEmpty
+                      ? const Center(child: Text("Tidak Ada Buku"))
+                      : BookSearch(data: controller.listDataBuku)
+                  : const Center(child: CircularProgressIndicator())
+              : Column(
+                  children: data.map((e) => MyBuku(data: e.buku)).toList(),
+                ),
+        ),
       ]),
     );
   }
@@ -31,7 +57,7 @@ class MyBuku extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
@@ -54,7 +80,8 @@ class MyBuku extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                          image: NetworkImage(data![index].coverBuku.toString()),
+                          image:
+                              NetworkImage(data![index].coverBuku.toString()),
                           fit: BoxFit.fill),
                     ),
                   ),

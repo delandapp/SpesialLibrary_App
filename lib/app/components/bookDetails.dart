@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:spesiallibrary/app/data/models/response_detailsbook.dart';
 import 'package:spesiallibrary/app/modules/detailbook/controllers/detailbook_controller.dart';
+import 'package:spesiallibrary/app/routes/app_pages.dart';
 
 class MyBookDetails extends StatelessWidget {
   const MyBookDetails(
@@ -123,7 +124,7 @@ class MyBookDetails extends StatelessWidget {
                     child: Text(
                       'KOLEKSI',
                       style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 20,
                           color: Colors.black,
                           fontFamily:
                               GoogleFonts.baloo2(fontWeight: FontWeight.bold)
@@ -132,12 +133,12 @@ class MyBookDetails extends StatelessWidget {
                   ),
                 )),
             const SizedBox(
-              width: 10,
+              width: 2,
             ),
             Expanded(
               flex: 4,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {Get.toNamed(Routes.PINJAM);},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0XFFA6F6FF),
                   shape: RoundedRectangleBorder(
@@ -148,7 +149,7 @@ class MyBookDetails extends StatelessWidget {
                 child: Text(
                   'PINJAM',
                   style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 20,
                       color: Colors.black,
                       fontFamily:
                           GoogleFonts.baloo2(fontWeight: FontWeight.bold)
@@ -193,7 +194,8 @@ class MyBookDetails extends StatelessWidget {
           textAlign: TextAlign.justify,
         ),
         const SizedBox(height: 40),
-        buildUlasanList()
+        buildUlasanList(),
+        const SizedBox(height: 40),
       ]),
     );
   }

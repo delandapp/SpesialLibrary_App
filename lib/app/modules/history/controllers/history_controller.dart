@@ -1,23 +1,23 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:spesiallibrary/app/data/constans/endpoint.dart';
-import 'package:spesiallibrary/app/data/models/response_bookmark_book.dart';
+import 'package:spesiallibrary/app/data/models/response_history_peminjaman.dart';
 import 'package:spesiallibrary/app/data/provider/api_provider.dart';
 import 'package:spesiallibrary/app/data/provider/storage_provider.dart';
 
-class BookmarkController extends GetxController with StateMixin<List<DataBookmark>> {
+class HistoryController extends GetxController with StateMixin<List<DataHistoryPeminjaman>> {
   //TODO: Implement BookmarkController
   String idUser = StorageProvider.read(StorageKey.idUser);
   final loading = false.obs;
-  RxBool dataBookmark = false.obs;
+  RxBool dataHistoryPeminjaman = false.obs;
   RxInt jumlahData = 0.obs;
-  RxList<DataBookmark> listKoleksi = <DataBookmark>[].obs;
+  RxList<DataHistoryPeminjaman> listHistory = <DataHistoryPeminjaman>[].obs;
 
   final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
-    getDataKoleksi();
+    getDataHistory();
   }
 
   @override
@@ -31,11 +31,11 @@ class BookmarkController extends GetxController with StateMixin<List<DataBookmar
   }
 
   void increment() => count.value++;
-    deleteKoleksi(int idbook) async {
+    deleteHistory(int idbook) async {
       loading(true);
       final bearerToken = StorageProvider.read(StorageKey.bearerToken);
       try {
-        final response = await ApiProvider.instance().delete('${Endpoint.koleksi}/$idbook',options: Options(headers: {"Authorization": "Bearer $bearerToken"}));
+        final response = await ApiProvider.instance().delete('${Endpoint.pinjam}/$idbook',options: Options(headers: {"Authorization": "Bearer $bearerToken"}));
         if (response.statusCode == 200) {
           loading(false);
           jumlahData.value = jumlahData.value - 1;
@@ -54,24 +54,24 @@ class BookmarkController extends GetxController with StateMixin<List<DataBookmar
         }
       }
     }
-   Future<void> getDataKoleksi() async {
+   Future<void> getDataHistory() async {
     change(null, status: RxStatus.loading());
 
     try {
       final bearerToken = StorageProvider.read(StorageKey.bearerToken);
-      final responseKoleksiBuku = await ApiProvider.instance().get(
-          '${Endpoint.koleksi}/$idUser',options: Options(headers: {"Authorization": "Bearer $bearerToken"}));
+      final responseHistoryPeminjaman = await ApiProvider.instance().get(
+          Endpoint.pinjam,options: Options(headers: {"Authorization": "Bearer $bearerToken"}));
 
-      if (responseKoleksiBuku.statusCode == 200) {
-        final ResponseBookmarkBook responseKoleksi = ResponseBookmarkBook.fromJson(responseKoleksiBuku.data);
-        if(responseKoleksi.data!.isEmpty ) {
-            change(responseKoleksi.data, status: RxStatus.success());
-            dataBookmark.value = true;
+      if (responseHistoryPeminjaman.statusCode == 200) {
+        final ResponseHistoryPeminjaman responseHistory = ResponseHistoryPeminjaman.fromJson(responseHistoryPeminjaman.data);
+        if(responseHistory.data!.isEmpty ) {
+            change(responseHistory.data, status: RxStatus.success());
+            dataHistoryPeminjaman.value = true;
           } else {
-            dataBookmark.value = false;
-            change(responseKoleksi.data, status: RxStatus.success());
-            listKoleksi.value = responseKoleksi.data!;
-            jumlahData.value = responseKoleksi.data!.length;
+            dataHistoryPeminjaman.value = false;
+            change(responseHistory.data, status: RxStatus.success());
+            listHistory.value = responseHistory.data!;
+            jumlahData.value = responseHistory.data!.length;
           }
       } else {
         change(null, status: RxStatus.error("Gagal Memanggil Data"));
